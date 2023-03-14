@@ -9,7 +9,8 @@
     "settings": {
         "import/resolver": {
             "node": {
-                "paths": ["."]
+                "paths": ["."],
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
             }
         }
     },
@@ -25,7 +26,6 @@
         "@typescript-eslint/no-explicit-any": 1,
 
         // Import
-        "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
         "import/order": [
             2,
             {
