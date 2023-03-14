@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import './App.css';
 import Layout from './components/Layout/Layout';
 import BoardPage from './pages/BoardPage';
+import { AppProvider } from './context/AppContext';
 
 function App() {
   return (
@@ -17,14 +18,16 @@ function App() {
         <CssBaseline />
 
         <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route index path="/" element={<BoardPage />} />
-              <Route path="/task/:taskId/edit" element={<div />} />
-              <Route path="/task/create" element={<div />} />
-              <Route path="*" element={<div />} />
-            </Routes>
-          </Layout>
+          <AppProvider>
+            <Layout>
+              <Routes>
+                <Route index path="/" element={<BoardPage />} />
+                <Route path="/task/:taskId/edit" element={<div />} />
+                <Route path="/task/create" element={<div />} />
+                <Route path="*" element={<div />} />
+              </Routes>
+            </Layout>
+          </AppProvider>
         </BrowserRouter>
       </main>
     </>
