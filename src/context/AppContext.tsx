@@ -1,7 +1,6 @@
 import React from 'react';
 
-// eslint-disable-next-line import/named
-import { To, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { IColumn, ITask } from '../types';
 
@@ -15,7 +14,7 @@ interface IDefaultAppContextState {
 interface IDefaultContext {
   context: IDefaultAppContextState;
   setColumns: (newColumns: IColumn[]) => void;
-  handleNavigate: (newRoute: To) => void;
+  handleNavigate: (newRoute: string | number) => void;
   setTasks: (tasks: ITask[]) => void;
   setSelectedTask: (task: ITask | null) => void;
   setPageTitle: (title: string) => void;
@@ -63,25 +62,28 @@ function AppProvider({ children }: { children: JSX.Element }) {
   const [context, setContext] = React.useState(defaultAppContextState);
   const navigate = useNavigate();
 
-  const handleNavigate = (newRoute: To): void => {
-    navigate(newRoute);
-  };
+  const handleNavigate = React.useCallback(
+    (newRoute: string | number): void => {
+      navigate(newRoute as any);
+    },
+    [navigate]
+  );
 
-  const setColumns = (newColumns: IColumn[]): void => {
+  const setColumns = React.useCallback((newColumns: IColumn[]): void => {
     setContext((prevState) => ({ ...prevState, columns: newColumns }));
-  };
+  }, []);
 
-  const setTasks = (tasks: ITask[]): void => {
+  const setTasks = React.useCallback((tasks: ITask[]): void => {
     setContext((prevState) => ({ ...prevState, tasks }));
-  };
+  }, []);
 
-  const setSelectedTask = (task: ITask | null): void => {
+  const setSelectedTask = React.useCallback((task: ITask | null): void => {
     setContext((prevState) => ({ ...prevState, selectedTask: task }));
-  };
+  }, []);
 
-  const setPageTitle = (title: string): void => {
+  const setPageTitle = React.useCallback((title: string): void => {
     setContext((prevState) => ({ ...prevState, pageTitle: title }));
-  };
+  }, []);
 
   const value = React.useMemo(
     () => ({
@@ -92,7 +94,14 @@ function AppProvider({ children }: { children: JSX.Element }) {
       handleNavigate,
       setPageTitle,
     }),
-    [context, handleNavigate]
+    [
+      context,
+      handleNavigate,
+      setColumns,
+      setPageTitle,
+      setSelectedTask,
+      setTasks,
+    ]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

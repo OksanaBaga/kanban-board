@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { useLocation } from 'react-router-dom';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
+import { AppContext } from '../../context/AppContext';
+
 function MenuIcon() {
   const location = useLocation();
+  const { handleNavigate } = useContext(AppContext);
 
   // Don't show any icons for the root page.
   if (location.pathname === '/') return null;
 
   // Go back on click.
-  return (
-    <ArrowBackIosIcon
-      onClick={() => {
-        // TODO:
-      }}
-    />
-  );
+  return <ArrowBackIosIcon onClick={() => handleNavigate(-1)} />;
 }
 
 function Header() {
