@@ -7,6 +7,9 @@ import './App.css';
 import Layout from './components/Layout/Layout';
 import BoardPage from './pages/BoardPage';
 import { AppProvider } from './context/AppContext';
+import CreateTaskPage from './pages/CreateTaskPage';
+import EditTaskPage from './pages/EditTaskPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -22,9 +25,9 @@ function App() {
             <Layout>
               <Routes>
                 <Route index path="/" element={<BoardPage />} />
-                <Route path="/task/:taskId/edit" element={<div />} />
-                <Route path="/task/create" element={<div />} />
-                <Route path="*" element={<div />} />
+                <Route path="/task/:taskId/edit" element={<EditTaskPage />} />
+                <Route path="/task/create" element={<CreateTaskPage />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Layout>
           </AppProvider>
