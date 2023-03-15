@@ -43,7 +43,7 @@ export default function useApi() {
     }
   };
 
-  const fetchTask = async (taskId: number) => {
+  const fetchTask = async (taskId: string) => {
     setLoading(true);
 
     try {

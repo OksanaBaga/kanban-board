@@ -82,6 +82,7 @@ function AppProvider({ children }: { children: JSX.Element }) {
   }, []);
 
   const setPageTitle = React.useCallback((title: string): void => {
+    document.title = title;
     setContext((prevState) => ({ ...prevState, pageTitle: title }));
   }, []);
 

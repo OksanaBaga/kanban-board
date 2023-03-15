@@ -6,7 +6,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 import { AppContext } from '../../context/AppContext';
 
-function MenuIcon() {
+function MenuIcon(): JSX.Element | null {
   const location = useLocation();
   const { handleNavigate } = useContext(AppContext);
 
@@ -17,7 +17,9 @@ function MenuIcon() {
   return <ArrowBackIosIcon onClick={() => handleNavigate(-1)} />;
 }
 
-function Header() {
+function Header(): JSX.Element {
+  const { context } = useContext(AppContext);
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -31,7 +33,7 @@ function Header() {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Kanban board
+          {context.pageTitle}
         </Typography>
       </Toolbar>
     </AppBar>

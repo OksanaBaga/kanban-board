@@ -10,7 +10,7 @@ const fetchTaskList = async () => {
     });
 };
 
-const fetchTaskById = async (taskId: number) => {
+const fetchTaskById = async (taskId: string) => {
   return fetch(`${Config.backendUrl}/tasks/${taskId}`)
     .then(handleResponse)
     .catch((error) => {
@@ -18,7 +18,7 @@ const fetchTaskById = async (taskId: number) => {
     });
 };
 
-const createTask = async (task: string) => {
+const createTask = async (task: ITask) => {
   return fetch(`${Config.backendUrl}/tasks`, {
     method: 'POST',
     headers: {
@@ -32,7 +32,7 @@ const createTask = async (task: string) => {
     });
 };
 
-const updateTask = async (taskId: number, task: ITask) => {
+const updateTask = async (taskId: string, task: ITask) => {
   return fetch(`${Config.backendUrl}/tasks/${taskId}`, {
     method: 'PUT',
     headers: {
